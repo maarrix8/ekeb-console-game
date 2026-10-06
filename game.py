@@ -39,7 +39,7 @@ def check_answer(number,answer,clue,errors_fixed):
             return False
     if number==3:
         if answer=="almaty":
-            print("Правильно! Ошибка С исправлена")
+            print("Правильно! Ошибка С исправлена.")
             errors_fixed.append("C")
             return True
         else:
