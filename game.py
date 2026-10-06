@@ -31,7 +31,7 @@ def check_answer(number,answer,clue,errors_fixed):
             return True
     if number==2:
         if answer=="120":
-            print("Правильно! Ошибка B исправлена")
+            print("Правильно! Ошибка B исправлена.")
             errors_fixed.append("B")
             return True
         else:
