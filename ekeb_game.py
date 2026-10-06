@@ -1,0 +1,74 @@
+class GameStatus:
+    def __init__(self):
+        self.energy = 6
+        self.turns_left = 6
+        self.has_clue = False
+        self.has_charger = False 
+        self.charger_taken = False
+        self.errors = {"A": False, "B": False, "C": False}
+        self.game_over = False
+        self.win = False
+
+def menu():
+    print("МИССИЯ ЕКЕБ")
+    print("1. Играть")
+    print("2. Правила")
+    print("3. Выход")
+
+def check_end(state):
+    if all(state.errors.values()):
+        state.win = True
+        state.game_over = True
+        return True
+    
+    no_turns = state.turns_left <= 0
+    no_energy = state.energy < 2 and not state.has_charger and state.charger_taken
+    
+    if no_turns or no_energy:
+        state.game_over = True
+        state.win = False
+        return True
+    return False
+
+def main():
+    while True:
+        menu()
+        choice = input("Выберите (1-3): ").strip()
+        
+        if choice == '1':
+            state = GameStatus()
+            while not state.game_over:
+                print(f"\nЭнергия: {state.energy}/6 | Ходов: {state.turns_left}")
+                print("1. Осмотреть стенд")
+                print("2. Взять зарядку")
+                print("3. Использовать зарядку")
+                print("4. Исправить ошибку")
+                print("0. В меню")
+                
+                act = input("Действие (0-4): ").strip()
+                
+                if act == '0':
+                    break
+                elif act in ['1', '2', '3', '4']:
+                    print(f"Действие {act} сделают другие участники")
+                else:
+                    print("Неверная команда")
+                    continue
+                
+                if check_end(state):
+                    if state.win:
+                        print("Победа!")
+                    else:
+                        print("Поражение!")
+                    break
+                    
+        elif choice == '2':
+            print("Правила: исправьте 3 ошибки за 6 ходов.")
+        elif choice == '3':
+            print("Выход...")
+            break
+        else:
+            print("Введите 1, 2 или 3.")
+
+if __name__ == "__main__":
+    main()
