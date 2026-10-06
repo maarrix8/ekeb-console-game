@@ -19,30 +19,21 @@ def use_charger(inventory,energy,moves):
     print("Вы использовали зарядку.")
     print("Энергия восстановлена")
     return inventory,energy,moves
-def check_answer(number,answer,clue,errors_fixed):
-    answer=answer.strip().lower()
-    if number==1:
-        if not clue:
-            print("Сначало нужно осмотреть стенд.")
-            return False
-        if answer=="ekeb":
-            print("Правильно! Ошибка А исправлена")
-            errors_fixed.append("A")
-            return True
-    if number==2:
-        if answer=="120":
-            print("Правильно! Ошибка B исправлена.")
-            errors_fixed.append("B")
-            return True
-        else:
-            print("Неверный ответ")
-            return False
-    if number==3:
-        if answer=="almaty":
-            print("Правильно! Ошибка С исправлена.")
-            errors_fixed.append("C")
-            return True
-        else:
-            print("Неверный ответ")
-            return False
-    return False
+def show_status(energy,moves,errors_fixed,clue):
+    print()
+    print("----- СТАТУС -----")
+    print("Энергия:", energy)
+    print("Ходы:", moves)
+    if clue:
+        print("Улики: Код доступа: EKEB")
+    else:
+        print("Улик нет.")
+    if inventory:
+        print("Инвентарь:", inventory)
+    else:
+        print("Инвентарь пуст.")
+    if errors_fixed:
+        print("Исправленные ошибки:", errors_fixed)
+    else:
+        print("Ошибки ещё не исправлены.")
+    print("------------------")
